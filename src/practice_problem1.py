@@ -146,16 +146,16 @@ class Box(object):
             self.contents = self.contents + additional_contents
             return clipped
         else:
+            self.contents = ''
             for k in range(len(i)):
-                if k > (len(i) - self.volume + 3):
+                if k > self.volume - 1:
                     clipped = clipped + i[k]
                 else:
-                    self.contents = i + i[k]
+                    self.contents = self.contents + i[k]
             return clipped
 
-
         # ---------------------------------------------------------------------
-        # TODO: 3. Implement and test this function.
+        # DONE: 3. Implement and test this function.
         #     See the testing code (below) for more examples.
         # ---------------------------------------------------------------------
         # ---------------------------------------------------------------------
