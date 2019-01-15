@@ -40,8 +40,8 @@ def main():
     # UN-comment tests as you work the problems.
     ###########################################################################
 
-    run_test_init()
-    run_test_append_string()
+    # run_test_init()
+    # run_test_append_string()
     # run_test_double()
     # run_test_shrink()
     # run_test_double_then_shrink()
@@ -94,11 +94,16 @@ class Box(object):
           :type contents: str
           :type volume: int
         """
+        self.originalC = contents
+        self.originalV = volume
+        self.beforeResetC = []
 
         self.contents = contents
         self.volume = volume
         if len(self.contents) > volume:
             self.contents = ''
+            self.originalC = ''
+
         # ---------------------------------------------------------------------
         # DONE: 2. Implement and test this function.
         #     See the testing code (below) for more examples.
@@ -211,8 +216,10 @@ class Box(object):
           #   s is 'Robot Fun'   [this is the part of the doubled
           #                       contents that did NOT fit]
         """
+        return self.append_string(self.contents)
+
         # ---------------------------------------------------------------------
-        # TODO: 4. Implement and test this function.
+        # DONE: 4. Implement and test this function.
         #     The testing code is already written for you (above).
         # ---------------------------------------------------------------------
         # ---------------------------------------------------------------------
@@ -260,8 +267,11 @@ class Box(object):
         Type hints:
           :type new_volume: int
         """
+        self.volume = new_volume
+        return self.append_string('')
+
         # ---------------------------------------------------------------------
-        # TODO: 5. Implement and test this function.
+        # DONE: 5. Implement and test this function.
         #     The testing code is already written for you (above).
         # ---------------------------------------------------------------------
         # ---------------------------------------------------------------------
@@ -316,8 +326,11 @@ class Box(object):
         Type hints:
           :type new_volume: int
         """
+
+        return len(self.double() + self.shrink(new_volume))
+
         # ---------------------------------------------------------------------
-        # TODO: 6. Implement and test this function.
+        # DONE: 6. Implement and test this function.
         #     The testing code is already written for you (above).
         # ---------------------------------------------------------------------
         # ---------------------------------------------------------------------
@@ -335,8 +348,12 @@ class Box(object):
           Changes this Box's contents and volume to whatever they were
           when this Box was constructed.
         """
+        self.beforeResetC = self.beforeResetC + [self.contents]
+
+        self.contents = self.originalC
+        self.volume = self.originalV
         # ---------------------------------------------------------------------
-        # TODO: 7. Implement and test this function.
+        # DONE: 7. Implement and test this function.
         #     The testing code is already written for you (above).
         # ---------------------------------------------------------------------
         # ---------------------------------------------------------------------
@@ -363,8 +380,11 @@ class Box(object):
         Type hints:
           :type other_box: Box
         """
+        self.contents = self.originalC
+        s = self.append_string(other_box.contents)
+        other_box.contents = s
         # ---------------------------------------------------------------------
-        # TODO: 8. Implement and test this function.
+        # DONE: 8. Implement and test this function.
         #     The testing code is already written for you (above).
         # ---------------------------------------------------------------------
         # ---------------------------------------------------------------------
@@ -406,8 +426,9 @@ class Box(object):
           h = b.get_history()
           #   h is now ['GoodGo', 'GoodBye']
         """
+        return self.beforeResetC
         # ---------------------------------------------------------------------
-        # TODO: 9. Implement and test this function.
+        # DONE: 9. Implement and test this function.
         #     The testing code is already written for you (above).
         # ---------------------------------------------------------------------
         # ---------------------------------------------------------------------
@@ -433,8 +454,11 @@ class Box(object):
         Type hints:
           :type other_box: Box
         """
+        contents = self.contents + other_box.contents
+        volume = self.volume + other_box.volume
+        return Box(contents, volume)
         # ---------------------------------------------------------------------
-        # TODO: 10. Implement and test this function.
+        # DONE: 10. Implement and test this function.
         #     The testing code is already written for you (above).
         # ---------------------------------------------------------------------
         # ---------------------------------------------------------------------
